@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+           
+    <!-- ※ 스프링이 제공하는 환경 설정 XML 파일 샘픔 -->
+    <!--    → 스프링이 생성하고 관리해야 할 객체들에 대한 정보 전달 -->
+    
+    <!-- RecordImpl1 (Record) 클래스에 대한 객체 정보 전달 과정
+         (필요하면 니가 알아서 인스턴스 생성하고 쓸만큼쓰고 니가 종료해~)  -->
+    <bean id="dto" class="com.test.spr.MemberDTO"></bean>
+    <bean id="list" class="com.test.spr.MemberList">
+    	<property name="dao">
+    		<ref bean="dao"></ref>
+    	</property>
+    </bean>
+    
+    <!-- RecordImpl2 (Record) 클래스에 대한 객체 정보 전달 과정 -->
+    <bean id="dao" class="com.test.spr.MemberDAO">
+    	<property name="url">
+    		<ref bean="jdbc:oracle:thin:@211.238.142.161:xe"></ref>
+    	</property>
+    </bean>
+	
+</beans>
