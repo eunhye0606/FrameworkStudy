@@ -1,9 +1,9 @@
 /* ==============================================
-	MssqlDAO.java
+	OracleDAO.java
 	- DAO 역할
-	- OracleDAO 와 설정만 다르게 연결
+	- MssqlDAO 와 설정만 다르게 연결
 	  → MSSQL 서버가 구축되어 있지 않기 때문에
-	- IP 주소만 +1 해서
+	- IDAO 인터페이스를 구현하는 클래스 ++++
 ============================================== */
 package com.test.spr;
 
@@ -15,17 +15,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MssqlDAO
+public class OracleDAO implements IDAO
 {
-	//String url;
+	@Override
 	public List<MemberDTO> list() throws ClassNotFoundException, SQLException
 	{
 		List<MemberDTO> result = new ArrayList<MemberDTO>();
-		//url = "";
+		
 		// 데이터베이스 연결
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		Connection conn = DriverManager.getConnection
-				("jdbc:oracle:thin:@211.238.142.162:xe", "scott","tiger");
+				("jdbc:oracle:thin:@211.238.142.161:1521:xe", "scott","tiger");
 		
 		
 		// 쿼리문 준비 및 실행(select)

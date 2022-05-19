@@ -9,26 +9,42 @@ package com.test.spr;
 
 public class MemberList 
 {
-	// 처음에 연결하는 클래스 정보
+	// 처음에 연결하는 클래스 정보 → 삭제
 	/*
 	private OracleDAO dao;
 	
-	public MemberList()
+	public MemberList() 
 	{
 		// MemberList 입장에서 의존 객체 OracleDAO
 		dao = new OracleDAO();
 	}
 	*/
 	
-	// 두 번째 연결하는 클래스 정보
+	// 두 번째 연결하는 클래스 정보 → 삭제
+	/*
 	private MssqlDAO dao;
 	public MemberList()
 	{
 		// MemberList 입장에서 의존 객체 OracleDAO
 		dao = new MssqlDAO();
 	}
+	*/
 	
-	// print() 메소드 구현
+	// ※ 스프링 IoC/DI 패턴 적용
+	//    check~!!!
+	//    멤버 변수 추가하는 과정에서 데이터타입은 인터페이스 형식
+	//    DI 를 위한 준비 작업
+	
+	private IDAO dao;
+	
+	//check
+	//setter 메소드 추가
+	public void setDao(IDAO dao)
+	{
+		this.dao = dao;
+	}
+	
+	// print() 메소드 구현 → 수정 내용 없음, 그대로 사용
 	public void print()
 	{
 		try
@@ -43,4 +59,6 @@ public class MemberList
 			System.out.println(e.toString());
 		}
 	}
+
+	
 }
