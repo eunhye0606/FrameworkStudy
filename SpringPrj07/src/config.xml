@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<!-- ※ 스프링이 제공하는 환경 설정 XML 파일 샘플  -->
+	<!--    → 스프링이 생성하고 관리해야 할 객체들에 대한 정보 전달 -->
+	
+	
+	<!-- CalculatorImpl 클래스의 객체 생성 및 관리를 위한 정보 전달 -->
+	<bean id="cal" class="com.test.spr.CalculatorImpl"></bean>
+	
+	<!-- CalculatorAspect 클래스의 객체 생성 및 관리를 위한 정보 전달 -->
+	<bean id="aspect" class="com.test.spr.CalculatorAspect"></bean>
+	
+	
+	<!-- check~!!!!! -->
+	<!-- 스프링이 제공하는 가짜 객체(Proxy) 클래스의 객체 생성 및 관리를 위한 정보 전달 -->
+	<!-- → 『ProxcyFactoryBean』 이름만 기억해주세영 --> 
+	<!-- 프록시팩토리를찍어내는 Bean   -->
+	<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		
+		<!-- 주 업무 클래스의 인터페이스 정보 제공 -->
+		<!-- → 『proxyInterfaces』 왜 복수형이냐면, 인터페이스는 여러개 구현 가능 -->
+		<property name="proxyInterfaces">
+			<!-- 복수형태라서 list 엘리먼트 안에 넣어야 합니다!! -->
+			<list>
+				<!-- 인터페이스는 객체 생성 불가. 위치로 제공 / list 안에 value로 제공 -->
+				<value>com.test.spr.Calculator</value>
+			</list>
+		</property>
+
+
+
+		
+		<!-- 주 업무 클래스의 객체 정보 제공 -->
+		<!--  → 『target』 -->
+		<property name="target" ref="cal"></property>
+
+
+
+
+		
+		<!-- 보조 업무 클래스의 객체 정보 제공 -->
+		<!-- → 『interceptorNames』 보조 업무도, After Advice / Before Advice / Around Advice -->
+		<property name="interceptorNames">
+			<list>
+				<value>aspect</value>
+			</list>
+		</property>
+	
+	</bean>
+</beans>
